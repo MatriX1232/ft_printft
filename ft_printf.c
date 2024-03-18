@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftprintf.h                                         :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 16:59:28 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/17 17:06:29 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/03/17 17:01:59 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/03/18 10:52:42 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FTPRINTF
-# define FTPRINTF
+#include "ft_printf.h"
 
-#include <unistd.h>
-#include <stdarg.h>
+int	ft_get_arg_count(char *str)
+{
+	int	count;
 
-int	ft_printf(char *str, ...);
+	count = 0;
 
-#endif
+}
+
+
+int	ft_printf(char *str)
+{
+	int	counter;
+
+	counter = 0;
+
+}
