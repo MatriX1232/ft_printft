@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_char.c                                          :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 17:08:58 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/18 13:56:41 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/02/26 19:04:02 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/03/14 12:45:11 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-int	ft_char(char c)
+void	ft_putchar(char c)
 {
 	write(1, &c, 1);
-	return (1);
 }

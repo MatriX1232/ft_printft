@@ -1,25 +1,42 @@
 NAME = libftprintf.a
 
+LIBFTPATH = libft
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-FILES = ft_printft.c
+FILES = \
+		ft_printf.c
+
+FILESTYPES = \
+		types/ft_char.c \
+		types/ft_str.c \
+		types/ft_pointer.c
 
 OBJS = ${FILES:.c=.o}
+OBJSTYPES = ${FILESTYPES:.c=.o}
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	ar -rcs $(NAME) $(OBJS)
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o ${<:.c=.o}
 
-%.o %.c:
-	$(CC) $(CFLAGS) $(FILES)
+$(NAME): $(OBJS) $(OBJSTYPES)
+	@make -C $(LIBFTPATH)
+	ar -rcs $(NAME) $(OBJS) $(OBJSTYPES)
 
 clean:
-	rm -f (OBJS)
+	rm -f $(OBJS) $(OBJSTYPES)
+	@make clean -C $(LIBFTPATH)
 
 fclean: clean
 	rm -f $(NAME)
+	@make fclean -C $(LIBFTPATH)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+test:
+	@make
+	$(CC) $(CFLAGS) test.c libftprintf.a
+	./a.out
+
+.PHONY: all clean fclean re test

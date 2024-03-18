@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_char.c                                          :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 17:08:58 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/18 13:56:41 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/03/18 12:18:04 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/03/18 13:57:08 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
+#include <stdio.h>
 
-int	ft_char(char c)
+int	main(void)
 {
-	write(1, &c, 1);
-	return (1);
+	ft_printf("Ola %s ma %s kota.\n", "testInpt", "czarnego");
+	// printf("%");
+	return (0);
 }

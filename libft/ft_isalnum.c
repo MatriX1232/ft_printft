@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_char.c                                          :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 17:08:58 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/18 13:56:41 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/02/26 19:00:26 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/03/05 20:16:45 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-int	ft_char(char c)
+int	ft_isalnum(int c)
 {
-	write(1, &c, 1);
-	return (1);
+	if (ft_isalpha(c) || ft_isdigit(c))
+	{
+		return (8);
+	}
+	return (0);
 }

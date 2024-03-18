@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_char.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 17:08:58 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/18 13:56:41 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/02/28 16:14:06 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/03/11 14:39:07 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-int	ft_char(char c)
+size_t	ft_strlcpy(char *dest, char *src, size_t size)
 {
-	write(1, &c, 1);
-	return (1);
+	size_t	i;
+
+	i = 0;
+	if (size)
+	{
+		while (*(src + i) != '\0' && i + 1 < size)
+		{
+			*(dest + i) = *(src + i);
+			i++;
+		}
+		*(dest + i) = '\0';
+	}
+	while (*(src + i) != '\0')
+	{
+		i++;
+	}
+	return (i);
 }

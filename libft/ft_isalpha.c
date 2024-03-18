@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_char.c                                          :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 17:08:58 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/18 13:56:41 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/02/26 19:04:02 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/03/05 20:17:28 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
-
-int	ft_char(char c)
+int	ft_isalpha(int c)
 {
-	write(1, &c, 1);
-	return (1);
+	if (c >= 'a' && c <= 'z')
+	{
+		return (1024);
+	}
+	else if (c >= 'A' && c <= 'Z')
+	{
+		return (1024);
+	}
+	return (0);
 }

@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_char.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 17:08:58 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/18 13:56:41 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/03/05 11:57:44 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/03/13 15:31:02 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-int	ft_char(char c)
+char	*ft_strdup(const char *s)
 {
-	write(1, &c, 1);
-	return (1);
+	int			i;
+	char		*d;
+	const char	*ss;
+
+	ss = s;
+	d = (char *) malloc((sizeof(char) * ft_strlen((char *)ss)) + 1);
+	if (!d)
+		return (NULL);
+	if (*s == '\0')
+		*d = '\0';
+	i = 0;
+	while (*(ss + i))
+	{
+		*(d + i) = *(ss + i);
+		i++;
+	}
+	d[i] = '\0';
+	return (d);
 }
