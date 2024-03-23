@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexutils.c                                      :+:      :+:    :+:   */
+/*   ft_hex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:42:33 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/18 15:20:08 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:14:46 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
-static int	ft_hex_len(int n)
+static int	ft_hex_len(unsigned long long n)
 {
 	int	len;
 
 	len = 0;
-	if (n < 0)
-		len++;
 	while (n > 0)
 	{
 		n = n / 16;
@@ -27,37 +25,29 @@ static int	ft_hex_len(int n)
 	return (len);
 }
 
-static int	ft_flag_ret(int *n, char *num)
+void	ft_puthex(unsigned long long n, char form)
 {
-	if (*n == INT_MIN)
+	if (n >= 16)
 	{
-		ft_strlcat(num, "-2", 3);
-		*n = 147483647;
-		return (2);
+		ft_puthex(n / 16, form);
+		ft_puthex(n % 16, form);
 	}
-	else if (*n < 0)
+	else
 	{
-		num[0] = '-';
-		*n *= (-1);
-		return (1);
+		if (form == 'X')
+			ft_putchar("0123456789ABCDEF"[n % 16]);
+		else if (form == 'x')
+			ft_putchar("0123456789abcdef"[n % 16]);
 	}
-	return (0);
 }
 
-char	*ft_int_to_hex(int n)
+int	ft_hex(unsigned long long n, char form, int prefix)
 {
-	int		i;
-	int		flag;
-	char	*num;
+	int	total_len;
 
-	i = ft_hex_len(n) - 1;
-	num = (char *) malloc(sizeof(char) * (ft_hex_len(n) + 1));
-	flag = ft_flag_ret(&n, num);
-	num[i--] = '\0';
-	while (n > 0)
-	{
-		num[i--] = "0123456789ABCDEF"[n % 16];
-		n = n / 16;
-	}
-	return (num);
+	total_len = ft_hex_len(n);
+	if (prefix)
+		write(1, "0x", 2);
+	ft_puthex(n, form);
+	return (total_len);
 }

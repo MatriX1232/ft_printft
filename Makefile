@@ -5,12 +5,12 @@ LIBFTPATH = libft
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 FILES = \
-		ft_printf.c
+		ft_printf.c \
 
 FILESTYPES = \
 		types/ft_char.c \
 		types/ft_str.c \
-		types/ft_pointer.c
+		types/ft_hex.c \
 
 OBJS = ${FILES:.c=.o}
 OBJSTYPES = ${FILESTYPES:.c=.o}
@@ -36,7 +36,7 @@ re: fclean all
 
 test:
 	@make
-	$(CC) $(CFLAGS) test.c libftprintf.a
+	$(CC) $(CFLAGS) test.c libftprintf.a libft/libft.a
 	./a.out
 
 .PHONY: all clean fclean re test

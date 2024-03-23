@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:01:59 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/18 15:19:12 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:14:58 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ int	ft_get_arg_count(char *str)
 	count = 0;
 	set = (char *) malloc(sizeof(char) * 10);
 	ft_strlcat(set, "cspdiuxX%", 10);
-	printf("Set: %s\n", set);
 	while (*str)
 	{
 		if (*str == '%' && ft_check_in_tab(set, *(str + 1)))
 			count++;
+		if (*(str + 1) == '%')
+			str++;
 		str++;
 	}
 	free(set);
@@ -51,22 +52,23 @@ int	ft_match(char c, va_list arg)
 	int	len;
 
 	len = 0;
+	// printf("ft_match >> %c\n", c);
 	if (c == 'c')
 		len += ft_char(va_arg(arg, int));
 	else if (c == 's')
 		len += ft_str(va_arg(arg, char *));
 	else if (c == 'p')
-		len += ft_pointer(va_arg(arg, void *));
-	// else if (c == 'd')
-	// 	ft_nbr((int)arg);
-	// else if (c == 'i')
-	// 	ft_base((char *)arg);
-	// else if (c == 'u')
-	// 	ft_unsigned((unsigned int)arg);
-	// else if (c == 'x')
-	// 	ft_hexup((int)arg);
-	// else if (c == 'X')
-	// 	ft_hexdown((int)arg);
+		len += ft_hex(va_arg(arg, unsigned long long), 'x', 1);
+	else if (c == 'd')
+		ft_putnbr_fd(va_arg(arg, int), 1);
+	else if (c == 'i')
+		ft_putnbr_fd(va_arg(arg, unsigned int), 1);
+	else if (c == 'u')
+		ft_putnbr_fd(va_arg(arg, unsigned int), 1);
+	else if (c == 'x')
+		len += ft_hex(va_arg(arg, unsigned int), 'X', 0);
+	else if (c == 'X')
+		len += ft_hex(va_arg(arg, unsigned int), 'x', 0);
 	else if (c == '%')
 		ft_putchar('%');
 	return (len);
@@ -89,13 +91,13 @@ int	ft_printf(char *str, ...)
 		if (n > 0)
 		{
 			tmp = ft_strchr((const char *)str, '%');
-			// printf("tmp = %s\n", tmp);
-			// printf("pointer delta: %ld\n", str - tmp);
 			write(1, str, tmp - str);
-			// printf("tmp[1] = %c | %s\n", tmp[1], tmp);
 			total_len += ft_match(tmp[1], list);
 			str = tmp + 2;
-			n--;
+			// if (*str == '%')
+			// 	str++;
+			if (tmp[1] != '%')
+				n--;
 		}
 		else
 		{
@@ -105,6 +107,5 @@ int	ft_printf(char *str, ...)
 	}
 
 	va_end(list);
-	// free(tmp);
 	return (total_len);
 }
