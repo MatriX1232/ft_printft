@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 12:18:04 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/18 23:17:08 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/03/24 20:36:43 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	main(void)
 	ft_printf("Test %%s  | %s", str);
 	printf(" | %s\n", str);
 
-	ft_printf("Test %%p  | %p", str);
-	printf(" | %p\n", str);
+	ft_printf("Test %%p  | %p", &str);
+	printf(" | %p\n", &str);
 
-	ft_printf("Test %%d  | %d", 42);
-	printf(" | %d\n", 42);
+	ft_printf("Test %%d  | %d", n);
+	printf(" | %d\n", n);
 
 	ft_printf("Test %%u | %u", n);
 	printf(" | %u\n", n);

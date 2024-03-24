@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:01:59 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/18 23:14:58 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/03/24 20:53:51 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	ft_get_arg_count(char *str)
 	char	*set;
 
 	count = 0;
-	set = (char *) malloc(sizeof(char) * 10);
-	ft_strlcat(set, "cspdiuxX%", 10);
+	set = (char *) malloc(sizeof(char) * 13);
+	ft_strlcat(set, "cspdiuxX%%", 14);
 	while (*str)
 	{
 		if (*str == '%' && ft_check_in_tab(set, *(str + 1)))
@@ -52,7 +52,7 @@ int	ft_match(char c, va_list arg)
 	int	len;
 
 	len = 0;
-	// printf("ft_match >> %c\n", c);
+	printf("ft_match >> %c\n", c);
 	if (c == 'c')
 		len += ft_char(va_arg(arg, int));
 	else if (c == 's')
@@ -65,9 +65,9 @@ int	ft_match(char c, va_list arg)
 		ft_putnbr_fd(va_arg(arg, unsigned int), 1);
 	else if (c == 'u')
 		ft_putnbr_fd(va_arg(arg, unsigned int), 1);
-	else if (c == 'x')
-		len += ft_hex(va_arg(arg, unsigned int), 'X', 0);
 	else if (c == 'X')
+		len += ft_hex(va_arg(arg, unsigned int), 'X', 0);
+	else if (c == 'x')
 		len += ft_hex(va_arg(arg, unsigned int), 'x', 0);
 	else if (c == '%')
 		ft_putchar('%');
@@ -94,8 +94,8 @@ int	ft_printf(char *str, ...)
 			write(1, str, tmp - str);
 			total_len += ft_match(tmp[1], list);
 			str = tmp + 2;
-			// if (*str == '%')
-			// 	str++;
+			if (*str == '%')
+				str++;
 			if (tmp[1] != '%')
 				n--;
 		}
