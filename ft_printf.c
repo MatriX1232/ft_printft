@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:01:59 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/24 20:53:51 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:17:23 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ int	ft_get_arg_count(char *str)
 	{
 		if (*str == '%' && ft_check_in_tab(set, *(str + 1)))
 			count++;
-		if (*(str + 1) == '%')
+		if (*str == '%' && *(str + 1) == '%')
+		{
 			str++;
+			count++;
+		}
 		str++;
 	}
 	free(set);
@@ -52,7 +55,7 @@ int	ft_match(char c, va_list arg)
 	int	len;
 
 	len = 0;
-	printf("ft_match >> %c\n", c);
+	// printf("ft_match >> %c\n", c);
 	if (c == 'c')
 		len += ft_char(va_arg(arg, int));
 	else if (c == 's')
