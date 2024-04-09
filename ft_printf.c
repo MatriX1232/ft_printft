@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:01:59 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/04/08 20:05:21 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:31:12 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,28 @@ int	ft_get_arg_count(char *str)
 	return (count);
 }
 
-int	ft_match(char c, va_list arg)
+int	ft_match(char c, va_list arg, int *len)
 {
-	int	len;
-
-	len = 0;
 	// printf("ft_match >> %c\n", c);
 	if (c == 'c')
-		len += ft_char(va_arg(arg, int));
+		*len += ft_char(va_arg(arg, int));
 	else if (c == 's')
-		len += ft_str(va_arg(arg, char *));
+		*len += ft_str(va_arg(arg, char *));
 	else if (c == 'p')
-		len += ft_hex(va_arg(arg, unsigned long long), 'x', 1);
+		*len += ft_hex(va_arg(arg, unsigned long long), 'x', 1);
 	else if (c == 'd')
-		ft_nbr(va_arg(arg, int), &len);
+		ft_nbr(va_arg(arg, int), len);
 	else if (c == 'i')
-		ft_nbr(va_arg(arg, int), &len);
+		ft_nbr(va_arg(arg, int), len);
 	else if (c == 'u')
 		ft_putnbr_fd(va_arg(arg, unsigned int), 1);
 	else if (c == 'X')
-		len += ft_hex(va_arg(arg, unsigned int), 'X', 0);
+		*len += ft_hex(va_arg(arg, unsigned int), 'X', 0);
 	else if (c == 'x')
-		len += ft_hex(va_arg(arg, unsigned int), 'x', 0);
+		*len += ft_hex(va_arg(arg, unsigned int), 'x', 0);
 	else if (c == '%')
-		len += ft_char('%');
-	return (len);
+		*len += ft_char('%');
+	return (*len);
 }
 
 int	ft_printf(char *str, ...)
@@ -95,7 +92,8 @@ int	ft_printf(char *str, ...)
 		{
 			tmp = ft_strchr((const char *)str, '%');
 			write(1, str, tmp - str);
-			total_len += ft_match(tmp[1], list);
+			total_len += tmp - str;
+			total_len += ft_match(tmp[1], list, &total_len);
 			str = tmp + 2;
 			if (*str == '%')
 				str++;
@@ -105,6 +103,7 @@ int	ft_printf(char *str, ...)
 		else
 		{
 			write(1, str, ft_strlen(str));
+			total_len += ft_strlen(str);
 			break ;
 		}
 	}
