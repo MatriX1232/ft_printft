@@ -11,6 +11,7 @@ FILESTYPES = \
 		types/ft_char.c \
 		types/ft_str.c \
 		types/ft_hex.c \
+		types/ft_nbr.c
 
 OBJS = ${FILES:.c=.o}
 OBJSTYPES = ${FILESTYPES:.c=.o}
@@ -22,7 +23,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(OBJSTYPES)
 	@make -C $(LIBFTPATH)
-	ar -rcs $(NAME) $(OBJS) $(OBJSTYPES)
+	ar -rcs $(NAME) $(OBJS) $(OBJSTYPES) $(addsuffix libft.a,$(LIBFTPATH)/)
 
 clean:
 	rm -f $(OBJS) $(OBJSTYPES)
