@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_uint.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 16:14:06 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/22 11:30:14 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/04/11 15:19:36 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/04/11 15:37:35 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+void	ft_uint(unsigned int n, int *len)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		i++;
-	}
-	return (i);
+	if (n >= 10)
+		ft_uint(n / 10, len);
+	*len += ft_char(n % 10 + '0');
 }

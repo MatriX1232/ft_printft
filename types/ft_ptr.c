@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_ptr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 16:14:06 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/22 11:30:14 by msolinsk         ###   ########.fr       */
+/*   Created: 2024/04/11 15:44:37 by msolinsk          #+#    #+#             */
+/*   Updated: 2024/04/11 15:52:14 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_ptr(unsigned long long ptr)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
+	if (ptr == 0)
 	{
-		i++;
+		write(1, "(nil)", 5);
+		return (5);
 	}
-	return (i);
+	return (ft_hex(ptr, 'x', 1));
 }

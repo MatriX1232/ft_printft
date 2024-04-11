@@ -6,12 +6,12 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:01:59 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/04/09 14:31:12 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:49:38 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-// #include <stdio.h>
+#include <stdio.h>
 
 int	ft_check_in_tab(char *set, char c)
 {
@@ -33,72 +33,66 @@ int	ft_get_arg_count(char *str)
 	char	*set;
 
 	count = 0;
-	set = (char *) malloc(sizeof(char) * 12);
-	ft_strlcat(set, "cspdiuxX%%", 12);
+	set = (char *) malloc(sizeof(char) * 11);
+	if (!set)
+		return (0);
+	*set = '\0';
+	ft_strlcat(set, "cspdiuxX%%", 11);
 	while (*str)
 	{
 		if (*str == '%' && ft_check_in_tab(set, *(str + 1)))
 			count++;
 		if (*str == '%' && *(str + 1) == '%')
-		{
 			str++;
-			count++;
-		}
 		str++;
 	}
 	free(set);
 	return (count);
 }
 
-int	ft_match(char c, va_list arg, int *len)
+int	ft_match(char c, va_list *arg, int *len)
 {
 	// printf("ft_match >> %c\n", c);
 	if (c == 'c')
-		*len += ft_char(va_arg(arg, int));
+		*len += ft_char(va_arg(*arg, int));
 	else if (c == 's')
-		*len += ft_str(va_arg(arg, char *));
+		*len += ft_str(va_arg(*arg, char *));
 	else if (c == 'p')
-		*len += ft_hex(va_arg(arg, unsigned long long), 'x', 1);
-	else if (c == 'd')
-		ft_nbr(va_arg(arg, int), len);
-	else if (c == 'i')
-		ft_nbr(va_arg(arg, int), len);
+		*len += ft_ptr(va_arg(*arg, unsigned long long));
+	else if (c == 'd' || c == 'i')
+		ft_nbr(va_arg(*arg, int), len);
 	else if (c == 'u')
-		ft_putnbr_fd(va_arg(arg, unsigned int), 1);
+		ft_uint(va_arg(*arg, unsigned int), len);
 	else if (c == 'X')
-		*len += ft_hex(va_arg(arg, unsigned int), 'X', 0);
+		*len += ft_hex(va_arg(*arg, unsigned int), 'X', 0);
 	else if (c == 'x')
-		*len += ft_hex(va_arg(arg, unsigned int), 'x', 0);
+		*len += ft_hex(va_arg(*arg, unsigned int), 'x', 0);
 	else if (c == '%')
 		*len += ft_char('%');
-	return (*len);
+	return (1);
 }
 
-int	ft_printf(char *str, ...)
+int	ft_printf(const char *str, ...)
 {
 	int		total_len;
 	int		n;
 	char	*tmp;
 	va_list	list;
 
-	n = ft_get_arg_count(str);
+	n = ft_get_arg_count((char *)str);
 	va_start(list, str);
-
 	// printf("Number of args: %d\n", n);
-
+	total_len = 0;
 	while (*str)
 	{
 		if (n > 0)
 		{
-			tmp = ft_strchr((const char *)str, '%');
+			tmp = ft_strchr(str, '%');
 			write(1, str, tmp - str);
 			total_len += tmp - str;
-			total_len += ft_match(tmp[1], list, &total_len);
+			ft_match(tmp[1], &list, &total_len);
 			str = tmp + 2;
-			if (*str == '%')
-				str++;
-			if (tmp[1] != '%')
-				n--;
+			n--;
 		}
 		else
 		{

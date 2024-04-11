@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 12:18:04 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/04/09 19:59:16 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:52:43 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,49 +17,61 @@
 
 int	main(void)
 {
-	char	str[] = "Ola ma kota.";
+	// char	str[] = "Ola ma kota.";
+	char	*str = NULL;
 	int		n = 987654;
-	// int		total_len;
+	int		len1;
+	int		len2;
 
+	// printf("(NIL) = %p", NULL);
 	// printf("INT MIN = %d\n", INT_MIN);
 	printf("INT MAX =		 %d\n", INT_MAX);
 	printf("UNSIGNED INT MAX =	 %u\n", UINT_MAX);
-	printf("UNSIGNED INT MIN =	 %u\n", UINT32_MAX);
+	printf("UNSIGNED INT MAX =	 %u\n", UINT32_MAX);
 
-	ft_printf("Test %%c  | %c\n", '@');
-	printf("Test %%c  | %c\n", '@');
+	len1 = ft_printf(" %c ", '@');
+	len2 = printf(" %c ", '@');
+	printf("\n%d | %d\n\n", len1, len2);
 	// printf(" | %c\n", '@');
 
-	ft_printf("Test %%s  | %s\n", str);
-	printf("Test %%s  | %s\n", str);
+	len1 = ft_printf("Test %%s  | %s\n", str);
+	len2 = printf("Test %%s  | %s\n", str);
+	printf("%d | %d\n\n", len1, len2);
 	// printf(" | %s\n", str);
 
-	ft_printf("Test %%p  | %p\n", &str);
-	printf("Test %%p  | %p\n", &str);
+	len1 = ft_printf("Test %%p  | %p\n", &str);
+	len2 = printf("Test %%p  | %p\n", &str);
+	printf("%d | %d\n\n", len1, len2);
 	// printf(" | %p\n", &str);
 
-	ft_printf("Test %%d  | %d\n", n);
-	printf("Test %%d  | %d\n", n);
+	len1 = ft_printf("Test %%d  | %d\n", n);
+	len2 = printf("Test %%d  | %d\n", n);
+	printf("%d | %d\n\n", len1, len2);
 	// printf(" | %d\n", n);
 
-	ft_printf("Test %%i  | %i\n", n);
-	printf("Test %%i  | %i\n", n);
+	len1 = ft_printf("Test %%i  | %i\n", n);
+	len2 = printf("Test %%i  | %i\n", n);
+	printf("%d | %d\n\n", len1, len2);
 	// printf(" | %i\n", n);
 
-	ft_printf("Test %%u  | %u\n", n);
-	printf("Test %%u  | %u\n", n);
+	len1 = ft_printf("Test %%u  | %u\n", n);
+	len2 = printf("Test %%u  | %u\n", n);
+	printf("%d | %d\n\n", len1, len2);
 	// printf(" | %u\n", n);
 
-	ft_printf("Test %%x  | %x\n", n);
-	printf("Test %%x  | %x\n", n);
+	len1 = ft_printf("Test %%x  | %x\n", n);
+	len2 = printf("Test %%x  | %x\n", n);
+	printf("%d | %d\n\n", len1, len2);
 	// printf("  | %x\n", n);
 
-	ft_printf("Test %%X  | %X\n", n);
-	printf("Test %%X  | %X\n", n);
+	len1 = ft_printf("Test %%X  | %X\n", n);
+	len2 = printf("Test %%X  | %X\n", n);
+	printf("%d | %d\n\n", len1, len2);
 	// printf("  | %X\n", n);
 
-	ft_printf("Test  %%\n");
-	printf("Test  %%\n");
+	len1 = ft_printf("Test  %%\n");
+	len2 = printf("Test  %%\n");
+	printf("%d | %d\n\n", len1, len2);
 	// printf("  | %%\n");
 	return (0);
 }

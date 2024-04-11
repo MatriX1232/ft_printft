@@ -11,7 +11,9 @@ FILESTYPES = \
 		types/ft_char.c \
 		types/ft_str.c \
 		types/ft_hex.c \
-		types/ft_nbr.c
+		types/ft_nbr.c \
+		types/ft_uint.c \
+		types/ft_ptr.c
 
 OBJS = ${FILES:.c=.o}
 OBJSTYPES = ${FILESTYPES:.c=.o}
@@ -23,7 +25,9 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(OBJSTYPES)
 	@make -C $(LIBFTPATH)
-	ar -rcs $(NAME) $(OBJS) $(OBJSTYPES) $(addsuffix libft.a,$(LIBFTPATH)/)
+	@cp $(LIBFTPATH)/libft.a .
+	@mv $(LIBFTPATH)/libft.a $(NAME)
+	ar -rcs $(NAME) $(OBJS) $(OBJSTYPES)
 
 clean:
 	rm -f $(OBJS) $(OBJSTYPES)
@@ -37,7 +41,7 @@ re: fclean all
 
 test:
 	@make
-	$(CC) $(CFLAGS) test.c libftprintf.a libft/libft.a
+	$(CC) $(CFLAGS) test.c libftprintf.a libft.a
 	./a.out
 
 .PHONY: all clean fclean re test

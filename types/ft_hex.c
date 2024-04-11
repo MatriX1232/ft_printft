@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:42:33 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/03/18 23:14:46 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:52:17 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	ft_hex_len(unsigned long long n)
 {
 	int	len;
 
+	if (n == 0)
+		return (1);
 	len = 0;
 	while (n > 0)
 	{
@@ -35,9 +37,9 @@ void	ft_puthex(unsigned long long n, char form)
 	else
 	{
 		if (form == 'X')
-			ft_putchar("0123456789ABCDEF"[n % 16]);
+			write(1, &"0123456789ABCDEF"[n % 16], 1);
 		else if (form == 'x')
-			ft_putchar("0123456789abcdef"[n % 16]);
+			write(1, &"0123456789abcdef"[n % 16], 1);
 	}
 }
 
@@ -47,7 +49,10 @@ int	ft_hex(unsigned long long n, char form, int prefix)
 
 	total_len = ft_hex_len(n);
 	if (prefix)
+	{
 		write(1, "0x", 2);
+		total_len += 2;
+	}
 	ft_puthex(n, form);
 	return (total_len);
 }
