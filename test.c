@@ -6,7 +6,7 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 12:18:04 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/04/11 15:52:43 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:58:16 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ int	main(void)
 	len2 = printf("Test  %%\n");
 	printf("%d | %d\n\n", len1, len2);
 	// printf("  | %%\n");
+
+	ft_printf("Test not supported function: %b end.\n", 'a');
 	return (0);
 }
