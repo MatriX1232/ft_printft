@@ -53,3 +53,4 @@ dkms.conf
 
 *.vscode
 *ft_printf_tester
+test.c
