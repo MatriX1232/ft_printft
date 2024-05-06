@@ -6,12 +6,11 @@
 /*   By: msolinsk <msolinsk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:01:59 by msolinsk          #+#    #+#             */
-/*   Updated: 2024/04/11 15:49:38 by msolinsk         ###   ########.fr       */
+/*   Updated: 2024/05/06 12:26:54 by msolinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int	ft_check_in_tab(char *set, char c)
 {
@@ -52,7 +51,6 @@ int	ft_get_arg_count(char *str)
 
 int	ft_match(char c, va_list *arg, int *len)
 {
-	// printf("ft_match >> %c\n", c);
 	if (c == 'c')
 		*len += ft_char(va_arg(*arg, int));
 	else if (c == 's')
@@ -75,24 +73,20 @@ int	ft_match(char c, va_list *arg, int *len)
 int	ft_printf(const char *str, ...)
 {
 	int		total_len;
-	int		n;
 	char	*tmp;
 	va_list	list;
 
-	n = ft_get_arg_count((char *)str);
 	va_start(list, str);
-	// printf("Number of args: %d\n", n);
 	total_len = 0;
 	while (*str)
 	{
-		if (n > 0)
+		if (ft_get_arg_count((char *)str))
 		{
 			tmp = ft_strchr(str, '%');
 			write(1, str, tmp - str);
 			total_len += tmp - str;
 			ft_match(tmp[1], &list, &total_len);
 			str = tmp + 2;
-			n--;
 		}
 		else
 		{
@@ -101,7 +95,38 @@ int	ft_printf(const char *str, ...)
 			break ;
 		}
 	}
-
 	va_end(list);
 	return (total_len);
 }
+
+// int	ft_printf(const char *str, ...)
+// {
+// 	int		total_len;
+// 	int		n;
+// 	char	*tmp;
+// 	va_list	list;
+
+// 	n = ft_get_arg_count((char *)str);
+// 	va_start(list, str);
+// 	total_len = 0;
+// 	while (*str)
+// 	{
+// 		if (n > 0)
+// 		{
+// 			tmp = ft_strchr(str, '%');
+// 			write(1, str, tmp - str);
+// 			total_len += tmp - str;
+// 			ft_match(tmp[1], &list, &total_len);
+// 			str = tmp + 2;
+// 			n--;
+// 		}
+// 		else
+// 		{
+// 			write(1, str, ft_strlen(str));
+// 			total_len += ft_strlen(str);
+// 			break ;
+// 		}
+// 	}
+// 	va_end(list);
+// 	return (total_len);
+// }
